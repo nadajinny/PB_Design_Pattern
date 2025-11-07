@@ -1,85 +1,71 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="app">
+    <h1>🎨 Decorator Pattern Demo</h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+    <div class="button-group">
+      <button @click="runPattern">Run Decorator Pattern</button>
     </div>
-  </header>
 
-  <RouterView />
+    <p class="hint">
+      👉 버튼을 클릭하면 콘솔(DevTools → Console 탭)에<br />
+      Decorator 패턴 동작 로그가 출력됩니다.
+    </p>
+  </div>
 </template>
 
+<script lang="ts">
+import { defineComponent } from "vue";
+import runDecoratorPattern from "./decoratorPattern";
+
+export default defineComponent({
+  name: "App",
+  setup() {
+    const runPattern = () => {
+      runDecoratorPattern();
+    };
+
+    return { runPattern };
+  },
+});
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
+.app {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 80px;
+  font-family: "Segoe UI", Roboto, sans-serif;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+h1 {
+  color: #42b983;
+  margin-bottom: 24px;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #42b983;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-nav a:first-of-type {
-  border: 0;
+button:hover {
+  background-color: #369870;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.hint {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.6;
 }
 </style>
